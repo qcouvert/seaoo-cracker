@@ -15,24 +15,6 @@ __version__ = '0.0.1'
 logger = logging.getLogger("seaoo-cracker")
 
 
-def parse_opt():
-    """Parse the program options."""
-    parser = OptionParser()
-    parser.add_option('-f', '--forever',
-                      dest='forever',
-                      help='Run the script forever.',
-                      action='store_true',
-                      default=False)
-    parser.add_option('-i', '--interval',
-                      dest='interval',
-                      help='Interval to check the pdf database.',
-                      metavar='INTERVAL',
-                      action='store',
-                      type='int',
-                      default='600')
-    return parser.parse_args()
-
-
 def do_work():
     DATA_DB = os.environ['DATA_DB']
     connection = pymongo.Connection(DATA_DB)
@@ -61,6 +43,24 @@ def main():
     """Get the options and actually start the script"""
     options, args = parse_opt()
     start(options.forever, options.interval)
+
+
+def parse_opt():
+    """Parse the program options."""
+    parser = OptionParser()
+    parser.add_option('-f', '--forever',
+                      dest='forever',
+                      help='Run the script forever.',
+                      action='store_true',
+                      default=False)
+    parser.add_option('-i', '--interval',
+                      dest='interval',
+                      help='Interval to check the pdf database.',
+                      metavar='INTERVAL',
+                      action='store',
+                      type='int',
+                      default='600')
+    return parser.parse_args()
 
 
 if __name__ == '__main__':
