@@ -1,3 +1,4 @@
+boto==2.6.0
 pycrypto==2.6
 pymongo==2.3
 wsgiref==0.1.2
