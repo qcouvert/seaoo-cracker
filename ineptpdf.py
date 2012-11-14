@@ -2829,14 +2829,14 @@ class PDFObjStrmParser(PDFParser):
 ### My own code, for which there is none else to blame
 
 class PDFSerializer(object):
-    def __init__(self, inf, keypath):
+    def __init__(self, inf):
         global GEN_XREF_STM, gen_xref_stm
         gen_xref_stm = GEN_XREF_STM > 1
         self.version = inf.read(8)
         inf.seek(0)
         self.doc = doc = PDFDocument()
         parser = PDFParser(doc, inf)
-        doc.initialize(keypath)
+        doc.initialize()
         self.objids = objids = set()
         for xref in reversed(doc.xrefs):
             trailer = xref.trailer
@@ -3025,12 +3025,12 @@ def cli_main(argv=sys.argv):
               "separately.  Read the top-of-script comment for details." % \
               (progname,)
         return 1
-    if len(argv) != 4:
-        print "usage: %s KEYFILE INBOOK OUTBOOK" % (progname,)
+    if len(argv) != 3:
+        print "usage: %s INBOOK OUTBOOK" % (progname,)
         return 1
-    keypath, inpath, outpath = argv[1:]
+    inpath, outpath = argv[1:]
     with open(inpath, 'rb') as inf:
-        serializer = PDFSerializer(inf, keypath)
+        serializer = PDFSerializer(inf)
         # hope this will fix the 'bad file descriptor' problem
         with open(outpath, 'wb') as outf:
         # help construct to make sure the method runs to the end
