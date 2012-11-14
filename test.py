@@ -14,7 +14,7 @@ PDFID = 'a18c621b-9bce-49ee-8eeb-d43c924bc3df'
 def main():
     global USER, PASW, PDFID
     seao = Seao(USER, PASW)
-    pdf = seao.get_file(PDFID)
+    pdf = seao.get_file(PDFID, decrypt=True)
     with open('tmp.pdf', 'w+') as f:
         f.write(pdf)
     seao.logout()
