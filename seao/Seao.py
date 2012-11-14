@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-from seao.errors import NotLoggedError, InvalidUsernamePassword
+from seao.errors import NotLoggedError, InvalidUsernamePasswordError
 
 import requests
 
@@ -32,7 +32,7 @@ class Seao:
                 '__VIEWSTATE_SERSIDE': 1}
         res = self.session.post(self.url_index, data).text
         if res.find('window.location.replace') == -1:
-            raise InvalidUsernamePassword()
+            raise InvalidUsernamePasswordError()
 
 
     def logout(self):

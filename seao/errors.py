@@ -1,5 +1,6 @@
 class NotLoggedError(Exception):
     pass
 
-class InvalidUsernamePassword(Exception):
+
+class InvalidUsernamePasswordError(Exception):
     pass
